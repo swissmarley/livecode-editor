@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Code Editor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+        <div class="header">
+        <div class="logo">Live Code Editor</div>
+        <div class="controls">
+            <div class="layout-toggle">
+                <button class="layout-btn active" onclick="setLayout(event, 'horizontal')">⬌ Horizontal</button>
+                <button class="layout-btn" onclick="setLayout(event, 'vertical')">⬍ Vertical</button>
+            </div>
+            <button class="btn" onclick="clearAll()">
+                <span>🗑</span> Clear All
+            </button>
+            <button class="btn" onclick="downloadCode()">
+                <span>⬇</span> Download
+            </button>
+            <button class="btn btn-run" onclick="runCode()">
+                <span>▶</span> Run Code
+            </button>
+        </div>
+    </div>
+
+    <div class="container" id="container">
+        <div class="editors-container" id="editorsContainer">
+            <div class="editor-tabs">
+                <button class="tab active" onclick="switchTab(event, 'html')">
+                    <span class="tab-icon html-icon">⟨/⟩</span>
+                    HTML
+                </button>
+                <button class="tab" onclick="switchTab(event, 'css')">
+                    <span class="tab-icon css-icon">{ }</span>
+                    CSS
+                </button>
+                <button class="tab" onclick="switchTab(event, 'js')">
+                    <span class="tab-icon js-icon">JS</span>
+                    JavaScript
+                </button>
+            </div>
+            
+            <div class="editor active" id="htmlEditor">
+                <div class="editor-wrapper">
+                    <textarea id="htmlCode" placeholder="<!-- Write your HTML here -->" spellcheck="false"><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Live Code Editor! 🚀</h1>
+        <p>Start editing HTML, CSS, and JavaScript to see live updates!</p>
+        <button onclick="showMessage()">Click Me!</button>
+        <div id="message"></div>
+    </div>
+</body>
+</html></textarea>
+                </div>
+            </div>
+            
+            <div class="editor" id="cssEditor">
+                <div class="editor-wrapper">
+                    <textarea id="cssCode" placeholder="/* Write your CSS here */" spellcheck="false">* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+p {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #667eea;
+    height: 30px;
+}</textarea>
+                </div>
+            </div>
+            
+            <div class="editor" id="jsEditor">
+                <div class="editor-wrapper">
+                    <textarea id="jsCode" placeholder="// Write your JavaScript here" spellcheck="false">// JavaScript Demo Code
+function showMessage() {
+    const messages = [
+        "Hello World! 👋",
+        "Keep coding! 💻",
+        "You're awesome! ⭐",
+        "Happy coding! 🎉",
+        "Never stop learning! 📚"
+    ];
+    
+    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+    const messageEl = document.getElementById('message');
+    
+    // Add fade out effect
+    messageEl.style.opacity = '0';
+    
+    setTimeout(() => {
+        messageEl.textContent = randomMessage;
+        messageEl.style.opacity = '1';
+        messageEl.style.transition = 'opacity 0.5s ease';
+    }, 200);
+    
+    // Create floating particles effect
+    createParticles();
+}
+
+function createParticles() {
+    for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: fixed;
+                font-size: 20px;
+                left: ${Math.random() * window.innerWidth}px;
+                top: ${Math.random() * window.innerHeight}px;
+                animation: float 2s ease-out forwards;
+                pointer-events: none;
+                z-index: 1000;
+            `;
+            particle.textContent = '✨';
+            document.body.appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 2000);
+        }, i * 100);
+    }
+}
+
+// Add floating animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes float {
+        to {
+            transform: translateY(-100px) scale(0);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="preview-container" id="previewContainer">
+            <div class="resizer" id="resizer"></div>
+            <div class="preview-header">
+                <div class="preview-title">Live Preview</div>
+                <button class="btn" onclick="refreshPreview()">
+                    <span>🔄</span> Refresh
+                </button>
+            </div>
+            <iframe id="preview"></iframe>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
